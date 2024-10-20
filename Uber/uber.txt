@@ -1,0 +1,68 @@
+#problem 1
+import math
+
+def solution(p, q, r):
+    fac = math.factorial(q)
+    rem = pow(p, fac, r)
+    
+    return rem
+
+p = int(input())
+q = int(input())
+r = int(input())
+print(solution(p, q, r)) 
+
+# problem 2
+MOD = 10**9 + 7
+
+def solution(p, q, r):
+    n = len(p)
+    m = len(q)
+    l = len(r)
+    arr = [[[0 for _ in range(l + 1)] for _ in range(m + 1)] for _ in range(n + 1)]
+    arr[0][0][0] = 1
+    for i in range(n + 1):
+        for j in range(m + 1):
+            for k in range(l + 1):
+                if k == 0:
+                    arr[i][j][k] = 1
+                if i > 0 and k > 0 and p[i - 1] == r[k - 1]:
+                    arr[i][j][k] = (arr[i][j][k] + arr[i - 1][j][k - 1]) % MOD
+                if j > 0 and k > 0 and q[j - 1] == r[k - 1]:
+                    arr[i][j][k] = (arr[i][j][k] + arr[i][j - 1][k - 1]) % MOD
+    result = 0
+    for i in range(1, n + 1):
+        for j in range(1, m + 1):
+            if arr[i][j][l] > 0:
+                result = (result + arr[i][j][l]) % MOD
+    
+    return result
+
+p = input() 
+q = input()
+r = input()
+print(solution(p, q, r)) 
+
+# problem 3
+def solution(n, a, r):
+    MOD = 10**9 + 7
+    arr = [[0] * (n + 1) for _ in range(n + 1)]
+    for i in range(1, n + 1):
+        for j in range(1, n + 1):
+            arr[i][j] = min(arr[i - 1][j] + a[i - 1] * r[j - 1],
+                           arr[i][j - 1] + a[j - 1] * r[i - 1])
+            arr[i][j] %= MOD
+    return arr[n][n-1]
+
+
+
+
+n = 3
+a = [23, 45, 56]
+r = [11, 14, 3]
+result = solution(n, a, r)
+print(result) 
+
+
+
+
