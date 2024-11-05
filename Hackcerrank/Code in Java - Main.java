@@ -29,12 +29,12 @@ class Result {
 
         return result;
     }
-    
-    
-    // Dont write this below lines
+}
+// Dont Write this code
+public class Main {
     public static void main(String[] args) {
-        System.out.println(getDistance("QZ"));
-        System.out.println(getDistance("QA"));
-        System.out.println(getDistance("HELLO123"));
+        System.out.println(Result.getDistance("QZ"));
+        System.out.println(Result.getDistance("QA"));
+        System.out.println(Result.getDistance("HELLO123"));
     }
 }
